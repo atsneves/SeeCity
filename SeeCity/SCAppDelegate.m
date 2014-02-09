@@ -7,11 +7,20 @@
 //
 
 #import "SCAppDelegate.h"
-
+#import <FacebookSDK/FacebookSDK.h>
+#import "TestFlight.h"
 @implementation SCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-Bold" size:14], NSFontAttributeName, nil]];
+    
+    
+    [TestFlight takeOff:@"6f6b692f-f09f-4153-aa2b-37d425a7f104"];
+//    
     // Override point for customization after application launch.
     return YES;
 }
@@ -33,14 +42,23 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBAppEvents activateApp];
+    [FBAppCall handleDidBecomeActive];
+}
+
+// FBSample logic
+// It is important to close any FBSession object that is no longer useful
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [FBSession.activeSession close];
 }
 
 @end

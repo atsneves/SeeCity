@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SCViewController : UIViewController
+- (IBAction)actCriar:(id)sender;
 
+
+@property (weak, nonatomic) IBOutlet UITextField *txtLogin;
+@property (weak, nonatomic) IBOutlet UITextField *txtSenha;
+- (IBAction)actEntrar:(id)sender;
+- (IBAction)actFacebook:(id)sender;
 @end
