@@ -9,7 +9,7 @@
 #import "SCHomeViewController.h"
 #import "SCReportarViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "SCCrimesViewController.h"
 @interface SCHomeViewController ()
 
 @end
@@ -29,6 +29,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    _minhaLocalizacao = [[CLLocationManager alloc] init];
+    
+    
+    if ([CLLocationManager locationServicesEnabled])
+    {
+        
+        [_minhaLocalizacao startUpdatingLocation];
+        
+    }
+    else
+    {
+        UIAlertView *vwAlerta = [[UIAlertView alloc] initWithTitle:@"Atenção" message:@"Seu serviço de localização não está autorizado." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [vwAlerta show];
+    }
+    
     _vwBoxHome.layer.cornerRadius = 5.0f;
     _vwBoxHome.alpha = 0.8f;
     
@@ -47,6 +64,10 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 - (IBAction)actMapa:(id)sender {
+    
+    SCCrimesViewController *vcSCCrimesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCCrimesViewController"];
+    [self.navigationController pushViewController:vcSCCrimesViewController animated:YES];
+
 }
 
 - (IBAction)actEndereco:(id)sender {
@@ -58,7 +79,7 @@
         NSLog(@"renovar");
     }];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface SCHomeViewController : UIViewController
+@interface SCHomeViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vwBoxHome;
 
 - (IBAction)actMapa:(id)sender;
@@ -17,4 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnEndereco;
 @property (weak, nonatomic) IBOutlet UIButton *btnMapa;
 @property (weak, nonatomic) IBOutlet UIButton *btnReportar;
+@property (nonatomic, strong) CLLocationManager *minhaLocalizacao;
+
 @end

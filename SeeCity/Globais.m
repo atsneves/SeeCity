@@ -39,13 +39,10 @@ static Globais *compatilhada;
         if ([gerenciadorArquivos fileExistsAtPath:_caminhoArq]) {
             //carregar
             NSLog(@"Executou o dir %@",NSHomeDirectory());
-            _dadosFacebook = [[NSMutableArray alloc] initWithContentsOfFile:_caminhoArq];
         }
         else{
             //instanciar array
             NSLog(@"Executou o dir %@",NSHomeDirectory());
-            _dadosFacebook = [[NSMutableArray alloc] init];
-            
         }
         
         
@@ -62,7 +59,7 @@ static Globais *compatilhada;
         }
         
         
-        _userLogado = [[NSDictionary alloc] init];
+        
         
     }
     return self;

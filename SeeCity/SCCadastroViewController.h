@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtLogin;
 @property (weak, nonatomic) IBOutlet UITextField *txtSenha;
 @property (weak, nonatomic) IBOutlet UIButton *btnCadastrar;
-@property (weak, nonatomic) IBOutlet UIButton *actCadastrar;
+
+- (IBAction)actCadastrar:(id)sender;
 
 @end

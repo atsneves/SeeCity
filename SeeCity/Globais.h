@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <FacebookSDK/FacebookSDK.h>
+
+#import "SCUsuario.h"
+
 @interface Globais : NSObject
 
 
-@property (nonatomic,strong) NSMutableArray *dadosFacebook;
+@property (nonatomic,strong) NSDictionary *dadosFacebook;
 
 @property (nonatomic,strong) NSMutableArray *crimes;
 
@@ -19,7 +22,7 @@
 
 @property (nonatomic,strong) NSString *caminhoArqCrime;
 
-@property (nonatomic,strong) NSDictionary *userLogado;
+@property (nonatomic,strong) SCUsuario *userLogado;
 
 +(Globais*)shared;
 

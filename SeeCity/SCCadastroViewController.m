@@ -7,11 +7,21 @@
 //
 
 #import "SCCadastroViewController.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "SCUsuario.h"
+#import "Globais.h"
+#import "SCHomeViewController.h"
+
 
 @interface SCCadastroViewController ()
 {
     BOOL animate;
     float ver;
+    MBProgressHUD *hud;
+    BOOL withConnection;
+    AFHTTPRequestOperation *operation;
+    Globais *vg;
 }
 @end
 
@@ -41,6 +51,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    vg = [Globais shared];
+    
+    
     UIColor *cor = [UIColor colorWithRed:29.0f/255.0f green:53.0f/255.0f blue:157.0f/255.0f alpha:1.0f];
     animate = YES;
     _txtCidade.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Cidade" attributes:@{NSForegroundColorAttributeName: cor, NSFontAttributeName: @"HelveticaNeue-Bold"}];
@@ -68,8 +82,107 @@
     _btnCadastrar.layer.cornerRadius = 5.0f;
     self.navigationController.navigationBar.topItem.title = @"";
 
+    [self verificaConexao:1];
+    
+    
     
 }
+
+- (void)verificaConexao:(NSInteger)Type
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            hud.labelText = @"Sem conexão com a internet";
+            [hud hide:YES afterDelay:2];
+            withConnection = NO;
+        }
+        else
+        {
+            withConnection = YES;
+            
+            switch (Type) {
+                case 1:
+                    [self createLogin];
+                    break;
+                case 2:
+                    [self createUser];
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+    }];
+    [manager startMonitoring];
+}
+
+
+
+- (void)createLogin
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@generateLogin", kBaseURL]]];
+    [request setHTTPMethod: @"post"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+    [request setTimeoutInterval:60 * 10];
+    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.detailsLabelText = @"Gerando Login";
+    hud.dimBackground = YES;
+    
+    
+    operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation start];
+    
+
+    
+    
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        
+        
+        hud.detailsLabelText = [NSString stringWithFormat:@"Gerando Login"];
+        
+    }];
+    
+    
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation1, id responseObject) {
+        NSError *er;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&er];
+        
+        NSLog(@"res %@",[res description]);
+        
+        if (!er) {
+            _txtLogin.text = [res objectForKey:@"name"];
+            hud.hidden = YES;
+            [hud removeFromSuperViewOnHide];
+
+            
+            if (vg.dadosFacebook) {
+                UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:@"Complete o seu cadastro para continuar" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alerta show];
+                
+                _txtEmail.text = [vg.dadosFacebook objectForKey:@"email"];
+                _txtNome.text = [vg.dadosFacebook objectForKey:@"name"];
+                _txtCidade.text = [[vg.dadosFacebook objectForKey:@"location"] objectForKey:@"name"];
+                
+                NSLog(@"Dados Face %@",[vg.dadosFacebook description]);
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation1, NSError *error) {
+        NSLog(@"ERROR AQUI%@",[error description]);
+        [operation cancel];
+        hud.hidden = YES;
+        [hud removeFromSuperViewOnHide];
+    }];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = NO;
@@ -128,4 +241,124 @@
     }
 
 }
+- (IBAction)actCadastrar:(id)sender {
+    
+    BOOL isValid = YES;
+    NSString *strErro = @"O(s) campo(s) abaixo é(sao) obrigatório(s) \n";
+    
+    if (_txtNome.text.length <=1 ) {
+        isValid = NO;
+        strErro = [strErro stringByAppendingString:@" Nome \n"];
+    }
+    
+    if (_txtEmail.text.length <=1 ) {
+        isValid = NO;
+        strErro = [strErro stringByAppendingString:@" Email \n"];
+    }
+    
+    if (_txtCidade.text.length <=1 ) {
+        isValid = NO;
+        strErro = [strErro stringByAppendingString:@" Cidade \n"];
+    }
+    
+    if (_txtSenha.text.length <=1 ) {
+        isValid = NO;
+        strErro = [strErro stringByAppendingString:@" Senha \n"];
+    }
+    
+    if (!isValid) {
+        UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:strErro delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alerta show];
+    }
+    else
+    {
+        [self verificaConexao:2];
+    }
+    
+
+}
+
+- (void)createUser
+{
+    
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@novousuario", kBaseURL]]];
+    [request setHTTPMethod: @"post"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+    [request setTimeoutInterval:60 * 10];
+    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.detailsLabelText = @"Gerando Login";
+    hud.dimBackground = YES;
+    
+    NSDictionary *params =     @{@"nome":_txtNome.text,@"senha":_txtSenha.text,@"cidade":_txtCidade.text,@"email":_txtEmail.text,@"login":_txtLogin.text};
+    
+    NSError *e;
+    
+    NSLog(@"params PEOPLE %@",[params description]);
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:kNilOptions error:&e];
+    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    [request setHTTPBody: jsonData];
+    
+    
+    operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation start];
+    
+    
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        
+        
+        hud.detailsLabelText = [NSString stringWithFormat:@"Gerando Login"];
+        
+    }];
+    
+    SCHomeViewController *vcSCHomeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCHomeViewController"];
+
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation1, id responseObject) {
+        NSError *er;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&er];
+        
+        NSLog(@"res %@",[res description]);
+        
+        if (!er) {
+            
+            if (![res objectForKey:@"err"]) {
+                
+                
+                SCUsuario *usuario = [SCUsuario parseUsuario:res];
+                
+                vg.userLogado = usuario;
+                
+                [self.navigationController pushViewController:vcSCHomeViewController animated:YES];
+                
+                
+                
+            }
+            else
+            {
+                UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:@"Ocorreu um erro ao se cadastrar" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alerta show];
+
+            }
+            
+            hud.hidden = YES;
+            [hud removeFromSuperViewOnHide];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation1, NSError *error) {
+        NSLog(@"ERROR AQUI%@",[error description]);
+        [operation cancel];
+        hud.hidden = YES;
+        [hud removeFromSuperViewOnHide];
+    }];
+
+}
+
 @end

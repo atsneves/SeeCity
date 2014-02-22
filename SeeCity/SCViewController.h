@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface SCViewController : UIViewController
+@interface SCViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
 - (IBAction)actCriar:(id)sender;
 
 

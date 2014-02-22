@@ -10,13 +10,16 @@
 #import "Globais.h"
 #import "MBProgressHUD.h"
 #import "SCCrimesViewController.h"
+#import "AFNetworking.h"
 @interface SCReportarViewController ()
 {
     Globais *vg;
     NSMutableArray *arCategoria;
-    MBProgressHUD *hud;
+    
     NSTimer *time;
     NSMutableDictionary *dicSelectedCategoria;
+    MBProgressHUD *hud;
+    AFHTTPRequestOperation *operation;
 }
 @end
 
@@ -51,9 +54,9 @@
     
     vg = [Globais shared];
 
-    _lblUserName.text = [vg.userLogado objectForKey:@"name"];
+//    _lblUserName.text = [vg.userLogado objectForKey:@"name"];
     
-    arCategoria = [[NSMutableArray alloc] initWithArray:@[@{@"descricao":@"Furto",@"imagem":@"furto.png"},@{@"descricao":@"Assalto",@"imagem":@"assalto.png"},@{@"descricao":@"Assalto em Curso",@"imagem":@"assaltoemcurso.png"},@{@"descricao":@"Disparo de Alarme",@"imagem":@"disparodealarme.png"},@{@"descricao":@"Atividade Suspeita",@"imagem":@"suspeita.png"},@{@"descricao":@"Acidente",@"imagem":@"acidente.png"},@{@"descricao":@"Atentado ao pudor",@"imagem":@"atentado.png"},@{@"descricao":@"Comércio e uso de drogas",@"imagem":@"comercio.png"},@{@"descricao":@"Arrombamento",@"imagem":@"arrombamento.png"},@{@"descricao":@"Sequesto Relâmpago",@"imagem":@"sequestro.png"},@{@"descricao":@"Arrastão",@"imagem":@"arrastao.png"}]];
+    arCategoria = [[NSMutableArray alloc] initWithArray:@[@{@"descricao":@"Furto",@"imagem":@"furto.png",@"categoria":@"FURTO"},@{@"descricao":@"Assalto",@"imagem":@"assalto.png",@"categoria":@"ASSALTO"},@{@"descricao":@"Assalto em Curso",@"imagem":@"assaltoemcurso.png",@"categoria":@"ASSALTOCURSO"},@{@"descricao":@"Disparo de Alarme",@"imagem":@"disparodealarme.png",@"categoria":@"ALARME"},@{@"descricao":@"Atividade Suspeita",@"imagem":@"suspeita.png",@"categoria":@"ATIVIDADE"},@{@"descricao":@"Acidente",@"imagem":@"acidente.png",@"categoria":@"ACIDENTE"},@{@"descricao":@"Atentado ao pudor",@"imagem":@"atentado.png",@"categoria":@"ATENTADOPUDOR"},@{@"descricao":@"Comércio e uso de drogas",@"imagem":@"comercio.png",@"categoria":@"DROGAS"},@{@"descricao":@"Arrombamento",@"imagem":@"arrombamento.png",@"categoria":@"ARROMBAMENTO"},@{@"descricao":@"Sequesto Relâmpago",@"imagem":@"sequestro.png",@"categoria":@"SEQUESTRORELAMPAGO"},@{@"descricao":@"Arrastão",@"imagem":@"arrastao.png",@"categoria":@"ARRASTAO"}]];
 
     _pickerCategoria.dataSource = self;
     _pickerCategoria.delegate = self;
@@ -83,6 +86,10 @@
     
     [_mapa setRegion:regiao animated:YES];
     
+}
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    NSLog(@"Alterou o status");
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -163,21 +170,118 @@
     hud.detailsLabelText = @"Salvando informações";
     hud.dimBackground = YES;
     
-    NSDate* now = [NSDate date];
-    
-    [vg.crimes addObject:@{@"descricao":_txtDescricao.text,@"categoria":dicSelectedCategoria,@"usuario":[vg.userLogado objectForKey:@"username"],@"data":now}];
-    
-    [vg.crimes writeToFile:vg.caminhoArqCrime atomically:YES];
-    
-    
-    time = [NSTimer scheduledTimerWithTimeInterval:3
-                                            target:self
-                                          selector:@selector(openHome)
-                                          userInfo:nil
-                                           repeats:NO];
-    
-    
+    [self verificaConexao:1];
 }
+
+
+- (void)verificaConexao:(NSInteger)Type
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            hud.labelText = @"Sem conexão com a internet";
+            [hud hide:YES afterDelay:2];
+            
+        }
+        else
+        {
+            
+            switch (Type) {
+                case 1:
+                    [self createCrime];
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+    }];
+    [manager startMonitoring];
+}
+
+-(void)createCrime
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@addCrime", kBaseURL]]];
+    [request setHTTPMethod: @"post"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+    [request setTimeoutInterval:60 * 10];
+    
+    NSLog(@"categoria selecte %@",[dicSelectedCategoria description]);
+    
+    
+    NSDictionary *params =     @{@"categoria":[dicSelectedCategoria objectForKey:@"categoria"],@"descricao":_txtDescricao.text,@"longitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.longitude],@"latitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.latitude],@"usuario":vg.userLogado.usuario};
+    
+    NSError *e;
+    
+    NSLog(@"params PEOPLE %@",[params description]);
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:kNilOptions error:&e];
+    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    [request setHTTPBody: jsonData];
+    
+    
+    operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation start];
+    
+    
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        
+        
+        hud.detailsLabelText = [NSString stringWithFormat:@"Criando Crime"];
+        
+    }];
+    
+    
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation1, id responseObject) {
+        NSError *er;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&er];
+        
+        NSLog(@"res %@",[res description]);
+        NSNull *nulo = [[NSNull alloc] init];
+        
+
+        if (!er && res != nulo) {
+            
+            if (![res objectForKey:@"errors"]) {
+                
+                
+                [self openHome];
+                
+                
+            }
+            else
+            {
+                UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:@"Ocorreu um erro ao criar crime" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alerta show];
+                
+            }
+            
+            hud.hidden = YES;
+            [hud removeFromSuperViewOnHide];
+        }
+        else
+        {
+            UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:@"Ocorreu um erro ao criar crime" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alerta show];
+            hud.hidden = YES;
+            [hud removeFromSuperViewOnHide];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation1, NSError *error) {
+        NSLog(@"ERROR AQUI%@",[error description]);
+        [operation cancel];
+        hud.hidden = YES;
+        [hud removeFromSuperViewOnHide];
+    }];
+}
+
 - (void)openHome
 {
     hud.hidden = YES;
@@ -189,7 +293,7 @@
 - (IBAction)actSelecionar:(id)sender {
     _lblCategoria.text = [[arCategoria objectAtIndex:[_pickerCategoria selectedRowInComponent:0]] objectForKey:@"descricao"];
     
-    
+    dicSelectedCategoria =[arCategoria objectAtIndex:[_pickerCategoria selectedRowInComponent:0]];
     
     [UIView animateWithDuration:0.3 animations:^{
 
