@@ -30,6 +30,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    NSLog(@"DIDLOAD");
+    
     _minhaLocalizacao = [[CLLocationManager alloc] init];
     
     
@@ -46,8 +48,8 @@
         [vwAlerta show];
     }
     
-    _vwBoxHome.layer.cornerRadius = 5.0f;
-    _vwBoxHome.alpha = 0.8f;
+    _vwBoxHome.layer.cornerRadius = 15.0f;
+    _vwBoxHome.alpha = 0.5f;
     
     _btnEndereco.alpha = 1.0f;
     _btnMapa.alpha = 1.0f;

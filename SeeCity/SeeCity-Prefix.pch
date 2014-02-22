@@ -18,3 +18,5 @@
 
 
 #define kBaseURL @"http://54.207.48.104:8080/" 
+
+#define kApiKey @"AIzaSyCXukIKZniit1S3x3YQr770MowZ8od1DUw"

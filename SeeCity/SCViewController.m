@@ -59,6 +59,9 @@
 }
 
 - (IBAction)actCriar:(id)sender {
+    
+    vg.dadosFacebook = nil;
+    
     [_txtLogin resignFirstResponder];
     [_txtSenha resignFirstResponder];
 
@@ -196,11 +199,11 @@
     [request setTimeoutInterval:60 * 10];
     
     
-    NSDictionary *params = @{@"email":email,@"senha":senha,@"isFacebook":(face)?@"true":@"false",@"login":_txtLogin.text};
+    NSDictionary *params = @{@"email":email,@"senha":senha,@"isFacebook":(face)?@"true":@"false",@"login":@""};
     
     NSError *e;
     
-    NSLog(@"params PEOPLE %@",[params description]);
+    NSLog(@"params PEOPLE222222 %@",[params description]);
     
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:kNilOptions error:&e];
@@ -246,7 +249,7 @@
                 
                 [self.navigationController pushViewController:vcSCHomeViewController animated:YES];
                 
-                
+
                 
             }
             else

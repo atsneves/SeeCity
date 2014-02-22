@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-@interface SCReportarViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate>
+#import <GoogleMaps/GoogleMaps.h>
+@interface SCReportarViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate,GMSMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vwBox;
 - (IBAction)btnMenu:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *vwBoxMapa;
@@ -26,5 +27,11 @@
 
 @property (nonatomic, strong) CLLocationManager *minhaLocalizacao;
 - (IBAction)actEndereco:(id)sender;
+- (IBAction)actMenu:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *txtEndereco;
+@property (weak, nonatomic) IBOutlet UIView *vwEnderecosFind;
+- (IBAction)actClose:(id)sender;
+- (IBAction)toMyLocation:(id)sender;
 
+- (IBAction)actBuscarEndereco:(id)sender;
 @end

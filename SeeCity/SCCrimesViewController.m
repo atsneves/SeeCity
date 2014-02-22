@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "SCCrime.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "SCHomeViewController.h"
 @interface SCCrimesViewController ()
 {
     Globais *vg;
@@ -650,5 +651,20 @@
     [UIView animateWithDuration:1.0 animations:^{
         _vwComentar.frame = CGRectMake(0, -1000, _vwComentar.frame.size.width, _vwComentar.frame.size.height);
     }];
+}
+- (IBAction)actMenu:(id)sender {
+    
+    for (int i = 0; i < self.navigationController.childViewControllers.count; i++) {
+        
+        if ([[self.navigationController.childViewControllers objectAtIndex:i] isKindOfClass:[SCHomeViewController class]]) {
+            SCHomeViewController *vc = (SCHomeViewController*)[self.navigationController.childViewControllers objectAtIndex:i];
+            
+            [self.navigationController popToViewController:vc animated:YES];
+            
+            
+        }
+        
+    }
+
 }
 @end

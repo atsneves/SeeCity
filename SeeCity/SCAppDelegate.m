@@ -9,6 +9,7 @@
 #import "SCAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "TestFlight.h"
+#import <GoogleMaps/GoogleMaps.h>
 @implementation SCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,6 +19,8 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-Bold" size:14], NSFontAttributeName, nil]];
     
+    
+    [GMSServices provideAPIKey:kApiKey];
     
     [TestFlight takeOff:@"6f6b692f-f09f-4153-aa2b-37d425a7f104"];
 //    

@@ -336,6 +336,8 @@
                 
                 vg.userLogado = usuario;
                 
+                NSLog(@"VAMOS TESTAR ISSO AQUI");
+                
                 [self.navigationController pushViewController:vcSCHomeViewController animated:YES];
                 
                 

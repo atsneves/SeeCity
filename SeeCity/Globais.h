@@ -24,6 +24,10 @@
 
 @property (nonatomic,strong) SCUsuario *userLogado;
 
+@property (nonatomic,strong) CLLocation *minhaLocalizacao;
+
+@property (nonatomic,strong) NSDictionary *enderecoSelecionado;
+
 +(Globais*)shared;
 
 

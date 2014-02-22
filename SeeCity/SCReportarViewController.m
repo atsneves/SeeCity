@@ -11,15 +11,19 @@
 #import "MBProgressHUD.h"
 #import "SCCrimesViewController.h"
 #import "AFNetworking.h"
+#import "SCHomeViewController.h"
+#import "SCFindEnderecoViewController.h"
+
 @interface SCReportarViewController ()
 {
     Globais *vg;
     NSMutableArray *arCategoria;
-    
+    GMSMapView *mapaReport;
     NSTimer *time;
     NSMutableDictionary *dicSelectedCategoria;
     MBProgressHUD *hud;
     AFHTTPRequestOperation *operation;
+    GMSGeocoder *geocoder;
 }
 @end
 
@@ -35,7 +39,7 @@
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_txtDescricao resignFirstResponder];
+       [self.view endEditing:YES];
 }
 - (void)viewDidLoad
 {
@@ -47,8 +51,8 @@
     _txtDescricao.layer.cornerRadius = 5.0f;
     _lblCategoria.layer.cornerRadius = 5.0f;
     _btnPublicar.layer.cornerRadius = 5.0f;
-    _mapa.layer.cornerRadius = 5.0f;
     
+    _txtEndereco.layer.cornerRadius = 5.0f;
     
     dicSelectedCategoria = [[NSMutableDictionary alloc] init];
     
@@ -61,7 +65,7 @@
     _pickerCategoria.dataSource = self;
     _pickerCategoria.delegate = self;
  
-    _mapa.delegate = self;
+    
     
     _minhaLocalizacao = [[CLLocationManager alloc] init];
     
@@ -79,14 +83,50 @@
         [vwAlerta show];
     }
     
+    vg.minhaLocalizacao = _minhaLocalizacao.location;
     
-    MKCoordinateSpan zoom = MKCoordinateSpanMake(0.010, 0.010);
-    
-    MKCoordinateRegion regiao = MKCoordinateRegionMake(_minhaLocalizacao.location.coordinate, zoom);
-    
-    [_mapa setRegion:regiao animated:YES];
-    
+    [self minhaLocalizacaoSetada];
+
 }
+
+-(void)minhaLocalizacaoSetada
+{
+    [mapaReport removeFromSuperview];
+    [mapaReport clear];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_minhaLocalizacao.location.coordinate.latitude
+                                                            longitude:_minhaLocalizacao.location.coordinate.longitude
+                                                                 zoom:16];
+    [mapaReport setMapType:kGMSTypeSatellite];
+    mapaReport = [GMSMapView mapWithFrame:CGRectMake(0, 0, _vwBoxMapa.frame.size.width, _vwBoxMapa.frame.size.height) camera:camera];
+    
+    mapaReport.myLocationEnabled = YES;
+    
+    mapaReport.layer.cornerRadius = 5.0f;
+    [_vwBoxMapa addSubview:mapaReport];
+    
+    [_vwEnderecosFind bringSubviewToFront:mapaReport];
+    
+    mapaReport.delegate = self;
+    
+    geocoder = [GMSGeocoder geocoder];
+    
+    id handler = ^(GMSReverseGeocodeResponse *response, NSError *error) {
+        if (error == nil) {
+            GMSReverseGeocodeResult *result = response.firstResult;
+            GMSMarker *marker = [GMSMarker markerWithPosition:mapaReport.camera.target];
+            marker.title = [result.lines objectAtIndex:0];
+            marker.map = mapaReport;
+
+            if (result.lines.count > 0) {
+                _txtEndereco.text = [result.lines objectAtIndex:0];
+            }
+            
+        }
+    };
+    [geocoder reverseGeocodeCoordinate:mapaReport.camera.target completionHandler:handler];
+}
+
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     NSLog(@"Alterou o status");
@@ -211,8 +251,22 @@
     
     NSLog(@"categoria selecte %@",[dicSelectedCategoria description]);
     
+    CLLocationDegrees lat;
+    CLLocationDegrees lng;
     
-    NSDictionary *params =     @{@"categoria":[dicSelectedCategoria objectForKey:@"categoria"],@"descricao":_txtDescricao.text,@"longitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.longitude],@"latitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.latitude],@"usuario":vg.userLogado.usuario};
+    if (vg.enderecoSelecionado) {
+        lat = [[[vg.enderecoSelecionado objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+        
+        lng = [[[vg.enderecoSelecionado objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+    }
+    else
+    {
+        lat = _minhaLocalizacao.location.coordinate.latitude;
+        lng = _minhaLocalizacao.location.coordinate.longitude;
+    }
+    
+    
+    NSDictionary *params =     @{@"categoria":[dicSelectedCategoria objectForKey:@"categoria"],@"descricao":_txtDescricao.text,@"longitude":[NSString stringWithFormat:@"%f",lng],@"latitude":[NSString stringWithFormat:@"%f",lat],@"usuario":vg.userLogado.usuario};
     
     NSError *e;
     
@@ -308,5 +362,62 @@
 - (IBAction)actEndereco:(id)sender {
     SCCrimesViewController *vcSCCrimesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCCrimesViewController"];
     [self.navigationController pushViewController:vcSCCrimesViewController animated:YES];
+}
+
+- (IBAction)actMenu:(id)sender {
+    
+    for (int i = 0; i < self.navigationController.childViewControllers.count; i++) {
+        
+        if ([[self.navigationController.childViewControllers objectAtIndex:i] isKindOfClass:[SCHomeViewController class]]) {
+            SCHomeViewController *vc = (SCHomeViewController*)[self.navigationController.childViewControllers objectAtIndex:i];
+            
+            [self.navigationController popToViewController:vc animated:YES];
+            
+            
+        }
+        
+    }
+    
+}
+- (IBAction)actClose:(id)sender {
+    [self.view endEditing:YES];
+    _vwEnderecosFind.hidden = YES;
+    
+    if (vg.enderecoSelecionado) {
+        _txtEndereco.text = [vg.enderecoSelecionado objectForKey:@"endereco"];
+        
+        [mapaReport clear];
+        
+        
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        
+        CLLocationDegrees lati = [[[vg.enderecoSelecionado objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+        
+        CLLocationDegrees lng = [[[vg.enderecoSelecionado objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+        
+        marker.position = CLLocationCoordinate2DMake(lati, lng);
+        marker.title = _txtEndereco.text;
+
+        marker.map = mapaReport;
+        
+        
+        
+        GMSCameraPosition *sydney = [GMSCameraPosition cameraWithLatitude:lati
+                                                                longitude:lng
+                                                                     zoom:18];
+        [mapaReport setCamera:sydney];
+        
+    }
+    
+}
+
+- (IBAction)toMyLocation:(id)sender {
+    [self minhaLocalizacaoSetada];
+}
+
+- (IBAction)actBuscarEndereco:(id)sender {
+    
+    _vwEnderecosFind.hidden = NO;
+    vg.enderecoSelecionado = nil;
 }
 @end

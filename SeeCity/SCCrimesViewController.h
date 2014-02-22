@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vwComentar;
 
 @property (weak, nonatomic) IBOutlet UITextView *lblComentar;
+- (IBAction)actMenu:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnComentar;
 @end
