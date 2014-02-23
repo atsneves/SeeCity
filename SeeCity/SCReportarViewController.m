@@ -65,7 +65,7 @@
     _pickerCategoria.dataSource = self;
     _pickerCategoria.delegate = self;
  
-    
+    _lblUserName.text = vg.userLogado.usuario;
     
     _minhaLocalizacao = [[CLLocationManager alloc] init];
     
