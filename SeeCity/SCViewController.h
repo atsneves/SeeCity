@@ -13,6 +13,7 @@
 - (IBAction)actCriar:(id)sender;
 
 
+@property (weak, nonatomic) IBOutlet UIView *vwBG;
 @property (weak, nonatomic) IBOutlet UITextField *txtLogin;
 @property (weak, nonatomic) IBOutlet UITextField *txtSenha;
 - (IBAction)actEntrar:(id)sender;

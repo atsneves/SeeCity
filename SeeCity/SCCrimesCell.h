@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblComentar;
 @property (weak, nonatomic) IBOutlet UILabel *lblAgradecer;
 
+@property (weak, nonatomic) IBOutlet UIView *btnSaibaMais;
 @property (weak, nonatomic) IBOutlet UILabel *lblPor;
 @property (weak, nonatomic) IBOutlet UITextView *txtDescricao;
 @property (weak, nonatomic) IBOutlet UILabel *lblData;

@@ -11,12 +11,12 @@
 #import <GoogleMaps/GoogleMaps.h>
 @interface SCReportarViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate,GMSMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vwBox;
-- (IBAction)btnMenu:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *vwBoxMapa;
 - (IBAction)actDropDown:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblCategoria;
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapa;
+
 @property (weak, nonatomic) IBOutlet UITextView *txtDescricao;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
 @property (weak, nonatomic) IBOutlet UIButton *btnPublicar;
@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (nonatomic, strong) CLLocationManager *minhaLocalizacao;
-- (IBAction)actEndereco:(id)sender;
+
 - (IBAction)actMenu:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtEndereco;
 @property (weak, nonatomic) IBOutlet UIView *vwEnderecosFind;

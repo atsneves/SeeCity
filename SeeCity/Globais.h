@@ -30,5 +30,7 @@
 
 +(Globais*)shared;
 
++ (NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString;
 
++ (NSDictionary*)buscaCategoria:(NSString*)ide;
 @end

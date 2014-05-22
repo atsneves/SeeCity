@@ -30,6 +30,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+        
+    
     [CLLocationManager locationServicesEnabled];
     
     _txtLogin.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Login/E-mail" attributes:@{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: @"HelveticaNeue-Bold"}];
@@ -37,6 +39,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
 
+    _vwBG.layer.cornerRadius = 15.0f;
+    _vwBG.alpha = 0.5f;
     
     vg = [Globais shared];
 }
@@ -64,12 +68,16 @@
     
     [_txtLogin resignFirstResponder];
     [_txtSenha resignFirstResponder];
+    
+    
+    
+
 
 }
 - (IBAction)actEntrar:(id)sender {
     [_txtLogin resignFirstResponder];
     [_txtSenha resignFirstResponder];
-
+    
     
     
     BOOL isValid = YES;
@@ -98,7 +106,7 @@
         
         [self verificaConexao:1 login:_txtLogin.text withSenha:_txtSenha.text isFacebook:NO];
         
-
+        
     }
     
 }
@@ -237,6 +245,11 @@
         
         
         if (!er && res != nulo) {
+            
+            
+            
+            
+
             
             if (![res objectForKey:@"err"]) {
                 hud.hidden = YES;

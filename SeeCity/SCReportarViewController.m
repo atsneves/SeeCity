@@ -9,11 +9,11 @@
 #import "SCReportarViewController.h"
 #import "Globais.h"
 #import "MBProgressHUD.h"
-#import "SCCrimesViewController.h"
+#import "SCAgradecimentoViewController.h"
 #import "AFNetworking.h"
 #import "SCHomeViewController.h"
 #import "SCFindEnderecoViewController.h"
-
+#import "SCCrime.h"
 @interface SCReportarViewController ()
 {
     Globais *vg;
@@ -24,6 +24,7 @@
     MBProgressHUD *hud;
     AFHTTPRequestOperation *operation;
     GMSGeocoder *geocoder;
+    SCCrime *crimeCriado;
 }
 @end
 
@@ -84,6 +85,9 @@
     }
     
     vg.minhaLocalizacao = _minhaLocalizacao.location;
+    
+    NSLog(@"_minhaLocalizacao %@",[_minhaLocalizacao description]);
+
     
     [self minhaLocalizacaoSetada];
 
@@ -305,6 +309,7 @@
             
             if (![res objectForKey:@"errors"]) {
                 
+                crimeCriado = [SCCrime parseCrime:res];
                 
                 [self openHome];
                 
@@ -341,8 +346,9 @@
     hud.hidden = YES;
     [hud removeFromSuperViewOnHide];
     [time invalidate];
-    SCCrimesViewController *vcSCCrimesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCCrimesViewController"];
-    [self.navigationController pushViewController:vcSCCrimesViewController animated:YES];
+    SCAgradecimentoViewController *vcSCAgradecimentoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAgradecimentoViewController"];
+    vcSCAgradecimentoViewController.crimePublicado = crimeCriado;
+    [self.navigationController pushViewController:vcSCAgradecimentoViewController animated:YES];
 }
 - (IBAction)actSelecionar:(id)sender {
     _lblCategoria.text = [[arCategoria objectAtIndex:[_pickerCategoria selectedRowInComponent:0]] objectForKey:@"descricao"];
@@ -358,10 +364,6 @@
         }
         
     }];
-}
-- (IBAction)actEndereco:(id)sender {
-    SCCrimesViewController *vcSCCrimesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCCrimesViewController"];
-    [self.navigationController pushViewController:vcSCCrimesViewController animated:YES];
 }
 
 - (IBAction)actMenu:(id)sender {

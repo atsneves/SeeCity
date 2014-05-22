@@ -13,7 +13,12 @@
 - (IBAction)actReport:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tabela;
 @property (weak, nonatomic) IBOutlet UIView *vwBoxTitulo;
+
+- (IBAction)openDetails:(id)sender;
 @property (nonatomic, strong) CLLocationManager *minhaLocalizacao;
+
+@property (nonatomic,strong) CLLocation *localizacaoSelect;
+- (IBAction)actOpenDetails:(id)sender;
 
 - (IBAction)actAgradecer:(id)sender;
 

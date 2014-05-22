@@ -9,11 +9,14 @@
 #import "SCCrimesViewController.h"
 #import "Globais.h"
 #import "SCCrimesCell.h"
+#import "SCCrime.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
-#import "SCCrime.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "SCHomeViewController.h"
+#import "SCDetalheViewController.h"
+#import "MZFormSheetController.h"
+
 @interface SCCrimesViewController ()
 {
     Globais *vg;
@@ -125,9 +128,17 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
     [request setTimeoutInterval:60 * 10];
-    
-    
-    NSDictionary *params = @{@"longitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.longitude],@"latitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.latitude],@"order":order};
+    NSDictionary *params;
+    if (_localizacaoSelect) {
+        NSLog(@"_localizacaoSelect %@",[_localizacaoSelect description]);
+        
+        params = @{@"longitude":[NSString stringWithFormat:@"%f",_localizacaoSelect.coordinate.longitude],@"latitude":[NSString stringWithFormat:@"%f",_localizacaoSelect.coordinate.latitude],@"order":order};
+    }
+    else
+    {
+        params = @{@"longitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.longitude],@"latitude":[NSString stringWithFormat:@"%f",_minhaLocalizacao.location.coordinate.latitude],@"order":order};
+    }
+
     
     NSError *e;
     
@@ -464,6 +475,8 @@
     
     cell.btnComentar.tag = indexPath.row;
     
+    cell.btnSaibaMais.tag = indexPath.row;
+    
     cell.btnCompartilhar.tag = indexPath.row;
     
     cell.lblComentar.text = [NSString stringWithFormat:@"(%@)",crime.comentarios];
@@ -471,8 +484,15 @@
     cell.lblAgradecer.text = [NSString stringWithFormat:@"(%@)",crime.agradecimento];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    CLLocation *currentLoc;
+    if (_localizacaoSelect) {
+        currentLoc= _localizacaoSelect;
+    }
+    else
+    {
+        currentLoc= _minhaLocalizacao.location;
+    }
     
-    CLLocation *currentLoc = _minhaLocalizacao.location;
     
     CLLocationDegrees latCrime = [[crime.localizacao objectAtIndex:1] floatValue];
     CLLocationDegrees lngCrime = [[crime.localizacao objectAtIndex:0] floatValue];
@@ -514,6 +534,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+
 - (IBAction)actAgradecer:(id)sender {
     
     UIButton *btn = (UIButton*)sender;
@@ -667,4 +688,33 @@
     }
 
 }
+- (IBAction)actOpenDetails:(id)sender {
+
+    SCDetalheViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SCDetalheViewController"];
+    
+    UIButton *btn = (UIButton*)sender;
+    
+    SCCrime *crime = [arCrimes objectAtIndex:btn.tag];
+    
+    vc.crime = crime;
+    vc.localizacaoSelect = _localizacaoSelect;
+    vc.minhaLocalizacao = _minhaLocalizacao;
+    
+    MZFormSheetController *formSheet = [[MZFormSheetController alloc] initWithViewController:vc];
+    
+    
+    
+    formSheet.presentedFormSheetSize = CGSizeMake(300, 400);
+    formSheet.transitionStyle = MZFormSheetTransitionStyleBounce;
+    formSheet.shadowRadius = 2.0;
+    formSheet.shadowOpacity = 0.3;
+    formSheet.shouldDismissOnBackgroundViewTap = YES;
+    formSheet.shouldCenterVertically = YES;
+    
+    [self mz_presentFormSheetController:formSheet animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
+        
+    }];
+
+}
+
 @end

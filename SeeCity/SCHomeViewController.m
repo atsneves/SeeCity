@@ -10,6 +10,8 @@
 #import "SCReportarViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "SCCrimesViewController.h"
+#import "SCConfiguracoesViewController.h"
+#import "SCEnderecoViewController.h"
 @interface SCHomeViewController ()
 
 @end
@@ -73,15 +75,14 @@
 }
 
 - (IBAction)actEndereco:(id)sender {
+    SCEnderecoViewController *vcSCEnderecoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCEnderecoViewController"];
+    
+    [self.navigationController pushViewController:vcSCEnderecoViewController animated:YES];
 }
 - (IBAction)actSair:(id)sender {
+    SCConfiguracoesViewController *vcSCConfiguracoesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SCConfiguracoesViewController"];
     
-    [FBSession.activeSession closeAndClearTokenInformation];
-    [FBSession renewSystemCredentials:^(ACAccountCredentialRenewResult result, NSError *error) {
-        NSLog(@"renovar");
-    }];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:vcSCConfiguracoesViewController animated:YES];
     
 }
 

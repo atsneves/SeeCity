@@ -50,9 +50,19 @@
     NSDictionary *dicEndereco = [arEndereco objectAtIndex:indexPath.row];
     vg.enderecoSelecionado = dicEndereco;
     
-    SCReportarViewController *vc = (SCReportarViewController*)[self parentViewController];
+    if (_reportar) {
+        SCReportarViewController *vc = (SCReportarViewController*)[self parentViewController];
+        [vc actClose:nil];
+    }
+    else
+    {
+        SCEnderecoViewController *vc = (SCEnderecoViewController*)[self parentViewController];
+        [vc actClose:nil];
+    }
     
-    [vc actClose:nil];
+
+    
+    
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
