@@ -35,7 +35,7 @@
     NSLog(@"DIDLOAD");
     
     _minhaLocalizacao = [[CLLocationManager alloc] init];
-    
+    _minhaLocalizacao.delegate = self;
     
     if ([CLLocationManager locationServicesEnabled])
     {
@@ -57,7 +57,15 @@
     _btnMapa.alpha = 1.0f;
     _btnReportar.alpha = 1.0f;
 }
-
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    
+    
+    _minhaLocalizacao = [locations lastObject];
+    
+    
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

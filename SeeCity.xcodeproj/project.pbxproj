@@ -84,6 +84,8 @@
 		579F34A0192EE551009F42FF /* selector_btn_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F349B192EE551009F42FF /* selector_btn_arrow.png */; };
 		579F34A1192EE551009F42FF /* selector_btn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F349C192EE551009F42FF /* selector_btn_arrow@2x.png */; };
 		579F34A4192EEAE5009F42FF /* TipoListagem.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F34A3192EEAE5009F42FF /* TipoListagem.m */; };
+		579F34A7192F0134009F42FF /* SCDelegaciaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F34A6192F0134009F42FF /* SCDelegaciaViewController.m */; };
+		579F34AA192F0348009F42FF /* SCDelegaciaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F34A9192F0348009F42FF /* SCDelegaciaTableViewCell.m */; };
 		57A3D336191083E100316363 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A3D335191083E100316363 /* FacebookSDK.framework */; };
 		57A3D3371910847900316363 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 570D419418B85761003A4D7A /* libTestFlight.a */; };
 		57BD4138192BBFF3006BEFEE /* Pagina-para-login.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD4137192BBFF3006BEFEE /* Pagina-para-login.png */; };
@@ -252,6 +254,10 @@
 		579F349C192EE551009F42FF /* selector_btn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selector_btn_arrow@2x.png"; sourceTree = "<group>"; };
 		579F34A2192EEAE5009F42FF /* TipoListagem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoListagem.h; sourceTree = "<group>"; };
 		579F34A3192EEAE5009F42FF /* TipoListagem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoListagem.m; sourceTree = "<group>"; };
+		579F34A5192F0134009F42FF /* SCDelegaciaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDelegaciaViewController.h; sourceTree = "<group>"; };
+		579F34A6192F0134009F42FF /* SCDelegaciaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDelegaciaViewController.m; sourceTree = "<group>"; };
+		579F34A8192F0348009F42FF /* SCDelegaciaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDelegaciaTableViewCell.h; sourceTree = "<group>"; };
+		579F34A9192F0348009F42FF /* SCDelegaciaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDelegaciaTableViewCell.m; sourceTree = "<group>"; };
 		57A3D335191083E100316363 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		57BD4137192BBFF3006BEFEE /* Pagina-para-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pagina-para-login.png"; sourceTree = "<group>"; };
 		57C9351C19186FDF00503059 /* enter_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter_512.png; sourceTree = "<group>"; };
@@ -384,6 +390,8 @@
 				5702CC7D1890F81100F6B951 /* SCCrimesCell.m */,
 				57F8000E1890C244001BCFAB /* Globais.h */,
 				57F8000F1890C244001BCFAB /* Globais.m */,
+				579F34A8192F0348009F42FF /* SCDelegaciaTableViewCell.h */,
+				579F34A9192F0348009F42FF /* SCDelegaciaTableViewCell.m */,
 			);
 			name = UICustom;
 			sourceTree = "<group>";
@@ -691,6 +699,8 @@
 				574F68A018BB25AB0073031B /* SCEnderecoViewController.m */,
 				57C9352C1918906900503059 /* SCDetalheViewController.h */,
 				57C9352D1918906900503059 /* SCDetalheViewController.m */,
+				579F34A5192F0134009F42FF /* SCDelegaciaViewController.h */,
+				579F34A6192F0134009F42FF /* SCDelegaciaViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -900,8 +910,10 @@
 				570D419018B85425003A4D7A /* SCLoginViewController.m in Sources */,
 				5D97B34B18A9BAD8006AE9A0 /* AFURLConnectionOperation.m in Sources */,
 				574F689B18BB06610073031B /* SCAgradecimentoViewController.m in Sources */,
+				579F34AA192F0348009F42FF /* SCDelegaciaTableViewCell.m in Sources */,
 				579F34A4192EEAE5009F42FF /* TipoListagem.m in Sources */,
 				5702CC7E1890F81100F6B951 /* SCCrimesCell.m in Sources */,
+				579F34A7192F0134009F42FF /* SCDelegaciaViewController.m in Sources */,
 				57C9354C191891BE00503059 /* UIViewController+TargetViewController.m in Sources */,
 				570D41C918B87C7A003A4D7A /* SCFindEnderecoViewController.m in Sources */,
 				57C93547191891BE00503059 /* MZFormSheetBackgroundWindowViewController.m in Sources */,

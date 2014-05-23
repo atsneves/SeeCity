@@ -465,6 +465,9 @@
                                 <state key="normal" image="delegacias.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="w0N-GV-AFW" kind="push" id="KNV-yq-QYY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NNN-JK-Nit">
                                 <rect key="frame" x="243" y="417" width="57" height="43"/>
@@ -611,6 +614,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="w0N-GV-AFW" kind="push" id="vjU-D6-SiL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obrigado, sua ocorrencia foi publicada com sucesso!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q2u-eW-U4q">
                                 <rect key="frame" x="45" y="78" width="231" height="57"/>
@@ -658,6 +664,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="33n-U0-lNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1012" y="1082"/>
+        </scene>
+        <!--Delegacia View Controller-->
+        <scene sceneID="CKL-eB-Yvq">
+            <objects>
+                <viewController storyboardIdentifier="SCDelegaciaViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w0N-GV-AFW" customClass="SCDelegaciaViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YJ8-zR-aqB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" id="ZdE-LS-n0q">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" id="Gmf-L5-ATi">
+                                <rect key="frame" x="3" y="19" width="314" height="442"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" id="1mB-5p-EsF">
+                                <rect key="frame" x="3" y="42" width="314" height="396"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celula" rowHeight="106" id="pVh-uI-N5b" customClass="SCDelegaciaTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="314" height="106"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pVh-uI-N5b" id="Hob-sL-yBs">
+                                            <rect key="frame" x="0.0" y="0.0" width="314" height="105"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delegacia 123" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xyW-Dd-xve">
+                                                    <rect key="frame" x="12" y="0.0" width="291" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="133 metros" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sVa-Zk-i0Z">
+                                                    <rect key="frame" x="12" y="23" width="291" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ssf-4F-ufh">
+                                                    <rect key="frame" x="12" y="39" width="291" height="66"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <string key="text">Rua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaa dfsfsdfds Rua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaaRua 123 aaa Rua 123 aaa</string>
+                                                    <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.9215686917" green="0.9215686917" blue="0.9215686917" alpha="1" colorSpace="deviceRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.9215686917" green="0.9215686917" blue="0.9215686917" alpha="1" colorSpace="deviceRGB"/>
+                                        <connections>
+                                            <outlet property="distancia" destination="sVa-Zk-i0Z" id="5lE-nA-Cnh"/>
+                                            <outlet property="endereco" destination="Ssf-4F-ufh" id="R3C-b6-TDl"/>
+                                            <outlet property="nome" destination="xyW-Dd-xve" id="iSe-1L-W1C"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qkm-ll-Co8">
+                                <rect key="frame" x="243" y="416" width="64" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="MENU" image="menu2.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actMenu:" destination="w0N-GV-AFW" eventType="touchUpInside" id="bzD-9T-5xc"/>
+                                    <action selector="actMenu:" destination="kCh-Yq-GEQ" eventType="touchUpInside" id="qhZ-kW-ntt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3WZ-aK-3XU"/>
+                    <connections>
+                        <outlet property="tabela" destination="1mB-5p-EsF" id="Ctm-OM-lPg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BLt-eZ-SM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1453" y="1073"/>
         </scene>
         <!--Crimes View Controller-->
         <scene sceneID="nXm-06-Nl0">
@@ -1331,5 +1425,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="8gV-Vt-I4Y"/>
+        <segue reference="KNV-yq-QYY"/>
     </inferredMetricsTieBreakers>
 </document>
