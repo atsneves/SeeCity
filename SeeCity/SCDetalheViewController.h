@@ -24,9 +24,14 @@
 @property (weak, nonatomic) IBOutlet UITextView *detalhe;
 @property (weak, nonatomic) IBOutlet UILabel *data;
 - (IBAction)actAgradecer:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *txtComentario;
 
 - (IBAction)actComentar:(id)sender;
 
 - (IBAction)actCompartilhar:(id)sender;
+
+- (IBAction)showComentar:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *boxComentario;
 
 @end

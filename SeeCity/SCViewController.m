@@ -259,7 +259,6 @@
                 SCUsuario *usuario = [SCUsuario parseUsuario:res];
                 
                 vg.userLogado = usuario;
-                
                 [self.navigationController pushViewController:vcSCHomeViewController animated:YES];
                 
 

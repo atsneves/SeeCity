@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <GoogleMaps/GoogleMaps.h>
-@interface SCEnderecoViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,GMSMapViewDelegate>
+#import "SCReportarViewController.h"
+
+@interface SCEnderecoViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,GMSMapViewDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vwBox;
 @property (weak, nonatomic) IBOutlet UITextField *txtEndereco;
 @property (weak, nonatomic) IBOutlet UILabel *lblLogin;
@@ -23,8 +25,11 @@
 - (IBAction)actClose:(id)sender;
 - (IBAction)toMyLocation:(id)sender;
 
-
+@property (weak, nonatomic) IBOutlet UITableView *tabela;
+@property (weak, nonatomic) IBOutlet UISearchBar *search;
 @property (nonatomic, strong) CLLocationManager *minhaLocalizacao;
+
+@property (nonatomic,strong) SCReportarViewController *reportar;
 @end
 
 

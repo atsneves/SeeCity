@@ -73,6 +73,17 @@
 		575B615718900F08002244E3 /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = 575B615418900F08002244E3 /* logo120.png */; };
 		575B615A18900F8B002244E3 /* splash_568.png in Resources */ = {isa = PBXBuildFile; fileRef = 575B615818900F8B002244E3 /* splash_568.png */; };
 		575B615B18900F8B002244E3 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 575B615918900F8B002244E3 /* splash.png */; };
+		579F348D192ED0AC009F42FF /* delegacias.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F348A192ED0AC009F42FF /* delegacias.png */; };
+		579F348E192ED0AC009F42FF /* menu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F348B192ED0AC009F42FF /* menu2.png */; };
+		579F348F192ED0AC009F42FF /* registrar.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F348C192ED0AC009F42FF /* registrar.png */; };
+		579F3491192EDCED009F42FF /* fundolixo.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F3490192EDCED009F42FF /* fundolixo.png */; };
+		579F3493192EDD2B009F42FF /* botoeslixo.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F3492192EDD2B009F42FF /* botoeslixo.png */; };
+		579F349D192EE551009F42FF /* AKLookups.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F3496192EE551009F42FF /* AKLookups.m */; };
+		579F349E192EE551009F42FF /* AKLookupsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F3498192EE551009F42FF /* AKLookupsListViewController.m */; };
+		579F349F192EE551009F42FF /* NSString+StringSizeWithFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F349A192EE551009F42FF /* NSString+StringSizeWithFont.m */; };
+		579F34A0192EE551009F42FF /* selector_btn_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F349B192EE551009F42FF /* selector_btn_arrow.png */; };
+		579F34A1192EE551009F42FF /* selector_btn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 579F349C192EE551009F42FF /* selector_btn_arrow@2x.png */; };
+		579F34A4192EEAE5009F42FF /* TipoListagem.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F34A3192EEAE5009F42FF /* TipoListagem.m */; };
 		57A3D336191083E100316363 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A3D335191083E100316363 /* FacebookSDK.framework */; };
 		57A3D3371910847900316363 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 570D419418B85761003A4D7A /* libTestFlight.a */; };
 		57BD4138192BBFF3006BEFEE /* Pagina-para-login.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD4137192BBFF3006BEFEE /* Pagina-para-login.png */; };
@@ -226,6 +237,21 @@
 		575B615418900F08002244E3 /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo120.png; sourceTree = "<group>"; };
 		575B615818900F8B002244E3 /* splash_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_568.png; sourceTree = "<group>"; };
 		575B615918900F8B002244E3 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		579F348A192ED0AC009F42FF /* delegacias.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delegacias.png; sourceTree = "<group>"; };
+		579F348B192ED0AC009F42FF /* menu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu2.png; sourceTree = "<group>"; };
+		579F348C192ED0AC009F42FF /* registrar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registrar.png; sourceTree = "<group>"; };
+		579F3490192EDCED009F42FF /* fundolixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fundolixo.png; sourceTree = "<group>"; };
+		579F3492192EDD2B009F42FF /* botoeslixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botoeslixo.png; sourceTree = "<group>"; };
+		579F3495192EE551009F42FF /* AKLookups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKLookups.h; sourceTree = "<group>"; };
+		579F3496192EE551009F42FF /* AKLookups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKLookups.m; sourceTree = "<group>"; };
+		579F3497192EE551009F42FF /* AKLookupsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKLookupsListViewController.h; sourceTree = "<group>"; };
+		579F3498192EE551009F42FF /* AKLookupsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKLookupsListViewController.m; sourceTree = "<group>"; };
+		579F3499192EE551009F42FF /* NSString+StringSizeWithFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringSizeWithFont.h"; sourceTree = "<group>"; };
+		579F349A192EE551009F42FF /* NSString+StringSizeWithFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringSizeWithFont.m"; sourceTree = "<group>"; };
+		579F349B192EE551009F42FF /* selector_btn_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selector_btn_arrow.png; sourceTree = "<group>"; };
+		579F349C192EE551009F42FF /* selector_btn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selector_btn_arrow@2x.png"; sourceTree = "<group>"; };
+		579F34A2192EEAE5009F42FF /* TipoListagem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoListagem.h; sourceTree = "<group>"; };
+		579F34A3192EEAE5009F42FF /* TipoListagem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoListagem.m; sourceTree = "<group>"; };
 		57A3D335191083E100316363 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		57BD4137192BBFF3006BEFEE /* Pagina-para-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pagina-para-login.png"; sourceTree = "<group>"; };
 		57C9351C19186FDF00503059 /* enter_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter_512.png; sourceTree = "<group>"; };
@@ -499,6 +525,21 @@
 			name = logo_splash;
 			sourceTree = "<group>";
 		};
+		579F3494192EE551009F42FF /* AKLookups */ = {
+			isa = PBXGroup;
+			children = (
+				579F3495192EE551009F42FF /* AKLookups.h */,
+				579F3496192EE551009F42FF /* AKLookups.m */,
+				579F3497192EE551009F42FF /* AKLookupsListViewController.h */,
+				579F3498192EE551009F42FF /* AKLookupsListViewController.m */,
+				579F3499192EE551009F42FF /* NSString+StringSizeWithFont.h */,
+				579F349A192EE551009F42FF /* NSString+StringSizeWithFont.m */,
+				579F349B192EE551009F42FF /* selector_btn_arrow.png */,
+				579F349C192EE551009F42FF /* selector_btn_arrow@2x.png */,
+			);
+			path = AKLookups;
+			sourceTree = "<group>";
+		};
 		57C9352F191891B000503059 /* popover */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +584,11 @@
 		57CD4A481890138B00ECDFDF /* image_for_app */ = {
 			isa = PBXGroup;
 			children = (
+				579F3492192EDD2B009F42FF /* botoeslixo.png */,
+				579F3490192EDCED009F42FF /* fundolixo.png */,
+				579F348A192ED0AC009F42FF /* delegacias.png */,
+				579F348B192ED0AC009F42FF /* menu2.png */,
+				579F348C192ED0AC009F42FF /* registrar.png */,
 				57BD4137192BBFF3006BEFEE /* Pagina-para-login.png */,
 				57C9354D19189D8B00503059 /* like.png */,
 				57C9354F19189E2700503059 /* comentar.png */,
@@ -592,6 +638,9 @@
 		57F800111890C4D8001BCFAB /* FrameWorksUtil */ = {
 			isa = PBXGroup;
 			children = (
+				579F34A2192EEAE5009F42FF /* TipoListagem.h */,
+				579F34A3192EEAE5009F42FF /* TipoListagem.m */,
+				579F3494192EE551009F42FF /* AKLookups */,
 				57C9352F191891B000503059 /* popover */,
 				570D419318B85761003A4D7A /* TestFlightSDK2.1.4 */,
 				5D97B33218A9BAD8006AE9A0 /* AFNetworking */,
@@ -763,6 +812,8 @@
 				575B615B18900F8B002244E3 /* splash.png in Resources */,
 				570D41A318B85DDA003A4D7A /* reportar.png in Resources */,
 				57C9351F19186FDF00503059 /* icon_facebook.png in Resources */,
+				579F348D192ED0AC009F42FF /* delegacias.png in Resources */,
+				579F348E192ED0AC009F42FF /* menu2.png in Resources */,
 				57F800221890CED3001BCFAB /* btnMapa.png in Resources */,
 				57F800201890CED3001BCFAB /* btnReportar.png in Resources */,
 				570D41AA18B864EB003A4D7A /* bgbtnordenar.png in Resources */,
@@ -771,10 +822,12 @@
 				57C935231918734500503059 /* btnFacebook.png in Resources */,
 				5D97B35A18AAAD78006AE9A0 /* configuracoes.png in Resources */,
 				57205A71189AFB7200AD142D /* assato.png in Resources */,
+				579F348F192ED0AC009F42FF /* registrar.png in Resources */,
 				570D41B018B86C38003A4D7A /* GoogleMaps.bundle in Resources */,
 				57205A6E189AFB7200AD142D /* suspeita.png in Resources */,
 				57205A69189AFB7200AD142D /* sequestro.png in Resources */,
 				57C93521191872B400503059 /* btnEntrar.png in Resources */,
+				579F3491192EDCED009F42FF /* fundolixo.png in Resources */,
 				57205A6F189AFB7200AD142D /* disparodealarme.png in Resources */,
 				57205A6C189AFB7200AD142D /* atentado.png in Resources */,
 				57C9352B19188E8A00503059 /* cancel-256.png in Resources */,
@@ -814,6 +867,7 @@
 				57205A6A189AFB7200AD142D /* arrombamento.png in Resources */,
 				570D41A218B85DDA003A4D7A /* configuracao.png in Resources */,
 				575B613018900DC2002244E3 /* Main.storyboard in Resources */,
+				579F34A1192EE551009F42FF /* selector_btn_arrow@2x.png in Resources */,
 				57205A68189AFB7200AD142D /* arrastao.png in Resources */,
 				57205A6D189AFB7200AD142D /* acidente.png in Resources */,
 				570D41A418B85DDA003A4D7A /* procurar.png in Resources */,
@@ -821,6 +875,8 @@
 				57BD4138192BBFF3006BEFEE /* Pagina-para-login.png in Resources */,
 				575B615518900F08002244E3 /* logo58.png in Resources */,
 				57F800211890CED3001BCFAB /* btnVisualizarMapa.png in Resources */,
+				579F34A0192EE551009F42FF /* selector_btn_arrow.png in Resources */,
+				579F3493192EDD2B009F42FF /* botoeslixo.png in Resources */,
 				570D419B18B85761003A4D7A /* README.md in Resources */,
 				57205A72189AFB7200AD142D /* furto.png in Resources */,
 			);
@@ -844,6 +900,7 @@
 				570D419018B85425003A4D7A /* SCLoginViewController.m in Sources */,
 				5D97B34B18A9BAD8006AE9A0 /* AFURLConnectionOperation.m in Sources */,
 				574F689B18BB06610073031B /* SCAgradecimentoViewController.m in Sources */,
+				579F34A4192EEAE5009F42FF /* TipoListagem.m in Sources */,
 				5702CC7E1890F81100F6B951 /* SCCrimesCell.m in Sources */,
 				57C9354C191891BE00503059 /* UIViewController+TargetViewController.m in Sources */,
 				570D41C918B87C7A003A4D7A /* SCFindEnderecoViewController.m in Sources */,
@@ -853,6 +910,8 @@
 				57C93549191891BE00503059 /* MZFormSheetSegue.m in Sources */,
 				574F68A118BB25AB0073031B /* SCEnderecoViewController.m in Sources */,
 				5D97B34718A9BAD8006AE9A0 /* AFHTTPRequestOperationManager.m in Sources */,
+				579F349E192EE551009F42FF /* AKLookupsListViewController.m in Sources */,
+				579F349F192EE551009F42FF /* NSString+StringSizeWithFont.m in Sources */,
 				57C9354A191891BE00503059 /* MZTransition.m in Sources */,
 				57C93548191891BE00503059 /* MZFormSheetController.m in Sources */,
 				5702CC741890F00800F6B951 /* SCCrimesViewController.m in Sources */,
@@ -872,6 +931,7 @@
 				57C93545191891BE00503059 /* NSInvocation+Copy.m in Sources */,
 				575B613318900DC2002244E3 /* SCViewController.m in Sources */,
 				575B612918900DC2002244E3 /* main.m in Sources */,
+				579F349D192EE551009F42FF /* AKLookups.m in Sources */,
 				5D97B34C18A9BAD8006AE9A0 /* AFURLRequestSerialization.m in Sources */,
 				5D97B34918A9BAD8006AE9A0 /* AFNetworkReachabilityManager.m in Sources */,
 				57FACD90189039910035EC72 /* SCCadastroViewController.m in Sources */,
@@ -1021,7 +1081,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AA88EF2C-87D1-4CFA-AD73-BCAF7F8F8C48";
+				PROVISIONING_PROFILE = "86734E1D-1452-412B-9220-031C64512818";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1049,7 +1109,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AA88EF2C-87D1-4CFA-AD73-BCAF7F8F8C48";
+				PROVISIONING_PROFILE = "86734E1D-1452-412B-9220-031C64512818";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

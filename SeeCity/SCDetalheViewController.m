@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Globais.h"
+#import "TipoListagem.h"
 @interface SCDetalheViewController ()
 {
     Globais *vg;
@@ -120,6 +121,9 @@
 
 - (IBAction)actComentar:(id)sender {
     
+    UIButton *btn = (UIButton*)sender;
+    
+    [self verificaConexao:3 withCrime:_crime withOrder:@"DATA"];
     
 }
 - (NSDictionary*)buscaCategoria:(NSString*)ide
@@ -174,6 +178,9 @@
                                       NSLog([NSString stringWithFormat:@"result: %@", result]);
                                       hud.hidden = YES;
                                       [hud removeFromSuperViewOnHide];
+                                      
+                                      UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atenção" message:@"Link compartilhado com sucesso" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                                      [alerta show];
                                   } else {
                                       // An error occurred, we need to handle the error
                                       // See: https://developers.facebook.com/docs/ios/errors
@@ -190,6 +197,15 @@
     }
     
     
+    
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+                [self.view endEditing:YES];
+        _boxComentario.hidden = YES;
+}
+- (IBAction)showComentar:(id)sender {
+    _boxComentario.hidden = NO;
     
 }
 - (void)verificaConexao:(NSInteger)Type withCrime:(SCCrime*)crime withOrder:(NSString*)order
@@ -280,11 +296,13 @@
         
         
         if (!er && res != nulo) {
-            
+            UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atençao" message:@"Comentário efetuado com sucesso." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alerta show];
             hud.hidden = YES;
             [hud removeFromSuperViewOnHide];
             [self verificaConexao:1 withCrime:nil withOrder:@"DATA"];
-            
+            _boxComentario.hidden = YES;
+            [self.view endEditing:YES];
         }
         else
         {
@@ -368,7 +386,8 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                
+                    UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Atenção" message:@"Agradecimento registrado com sucesso" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                    [alerta show];
                     
                     hud.hidden = YES;
                     [hud removeFromSuperViewOnHide];

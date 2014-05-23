@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "AKLookups.h"
 
-@interface SCCrimesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
+@interface SCCrimesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,AKLookupsDatasource, AKLookupsDelegate>
 - (IBAction)actReport:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tabela;
 @property (weak, nonatomic) IBOutlet UIView *vwBoxTitulo;

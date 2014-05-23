@@ -16,7 +16,7 @@
 #import "SCHomeViewController.h"
 #import "SCDetalheViewController.h"
 #import "MZFormSheetController.h"
-
+#import "TipoListagem.h"
 @interface SCCrimesViewController ()
 {
     Globais *vg;
@@ -24,6 +24,7 @@
     AFHTTPRequestOperation *operation;
     NSMutableArray *arCrimes;
     NSInteger indexClicado;
+    NSArray *arOrder;
 }
 @end
 
@@ -52,9 +53,14 @@
     arCrimes = [[NSMutableArray alloc] init];
     
     
-    
+    arOrder = [[NSMutableArray alloc] init];
     _minhaLocalizacao = [[CLLocationManager alloc] init];
     
+    arOrder = @[[TipoListagem memeWithTitle:@"Ordenar Lista Por" imageName:@"DATA"],
+                [TipoListagem memeWithTitle:@"Data" imageName:@"DATA"],
+                [TipoListagem memeWithTitle:@"Proximidade" imageName:@"PROX"],
+                [TipoListagem memeWithTitle:@"Categoria"  imageName:@"CATEGORIA"],
+                [TipoListagem memeWithTitle:@""  imageName:@"DATA"]];
     
     if ([CLLocationManager locationServicesEnabled])
     {
@@ -69,7 +75,17 @@
         [vwAlerta show];
     }
     
-    [self verificaConexao:1 withCrime:nil withOrder:@"DATA"];
+//    [self verificaConexao:1 withCrime:nil withOrder:@"DATA"];
+    
+    
+    AKLookups *carModelLookup = [[AKLookups alloc] initWithDelegate:self datasource:self];
+	carModelLookup.frame = CGRectMake(13.0f, 35.0f, 300.0f, 44.0f);
+	carModelLookup.bottomMargin = 25.0f;
+	[carModelLookup setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[carModelLookup setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+	[carModelLookup setBackgroundColor:[UIColor lightGrayColor]];
+	[self.view addSubview:carModelLookup];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -117,7 +133,7 @@
 }
 -(void)listaCrimes:(NSString*)order
 {
-    
+    [arCrimes removeAllObjects];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.dimBackground = YES;
     hud.detailsLabelText = @"Autenticando usuário";
@@ -704,7 +720,7 @@
     
     
     
-    formSheet.presentedFormSheetSize = CGSizeMake(300, 400);
+    formSheet.presentedFormSheetSize = CGSizeMake(300, 500);
     formSheet.transitionStyle = MZFormSheetTransitionStyleBounce;
     formSheet.shadowRadius = 2.0;
     formSheet.shadowOpacity = 0.3;
@@ -715,6 +731,15 @@
         
     }];
 
+}
+
+
+-(NSArray *)lookupsItems{
+	return arOrder;
+}
+-(void)lookups:(AKLookups *)lookups didSelectItemAtIndex:(NSUInteger)index{
+	TipoListagem *ameme = arOrder[index];
+	[self verificaConexao:1 withCrime:nil withOrder:ameme.imageName];
 }
 
 @end
